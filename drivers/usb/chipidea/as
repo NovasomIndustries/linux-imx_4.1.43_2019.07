@@ -1,0 +1,7 @@
+#!/bin/sh
+FILES=`ls *.c`
+for i in $FILES; do
+	echo "************** $i ****************" >> differences
+	diff $i ../../../../linux-imx_4.1-2.2.0-imx/drivers/usb/chipidea/$i >> differences
+	echo "************** $i END ************" >> differences
+done

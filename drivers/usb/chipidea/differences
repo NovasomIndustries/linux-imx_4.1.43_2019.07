@@ -1,0 +1,55 @@
+************** ci_hdrc_imx.c ****************
+************** ci_hdrc_imx.c END ************
+************** ci_hdrc_msm.c ****************
+************** ci_hdrc_msm.c END ************
+************** ci_hdrc_pci.c ****************
+************** ci_hdrc_pci.c END ************
+************** ci_hdrc_usb2.c ****************
+************** ci_hdrc_usb2.c END ************
+************** ci_hdrc_zevio.c ****************
+************** ci_hdrc_zevio.c END ************
+************** core.c ****************
+************** core.c END ************
+************** debug.c ****************
+297,298c297
+< 	if (ci->role != CI_ROLE_END)
+< 		seq_printf(s, "%s\n", ci_role(ci)->name);
+---
+> 	seq_printf(s, "%s\n", ci_role(ci)->name);
+************** debug.c END ************
+************** host.c ****************
+************** host.c END ************
+************** otg.c ****************
+225c225
+< 	ci->wq = create_freezable_workqueue("ci_otg");
+---
+> 	ci->wq = create_singlethread_workqueue("ci_otg");
+************** otg.c END ************
+************** otg_fsm.c ****************
+************** otg_fsm.c END ************
+************** udc.c ****************
+969,977d968
+< 	/*
+< 	 * Unexpected USB controller behavior, caused by bad signal integrity
+< 	 * or ground reference problems, can lead to isr_setup_status_phase
+< 	 * being called with ci->status equal to NULL.
+< 	 * If this situation occurs, you should review your USB hardware design.
+< 	 */
+< 	if (WARN_ON_ONCE(!ci->status))
+< 		return -EPIPE;
+< 
+2135d2125
+< 	int ret;
+2149a2140
+> 	ci->roles[CI_ROLE_GADGET] = rdrv;
+2151,2155c2142
+< 	ret = udc_start(ci);
+< 	if (!ret)
+< 		ci->roles[CI_ROLE_GADGET] = rdrv;
+< 
+< 	return ret;
+---
+> 	return udc_start(ci);
+************** udc.c END ************
+************** usbmisc_imx.c ****************
+************** usbmisc_imx.c END ************
